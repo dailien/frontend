@@ -1,0 +1,83 @@
+<div class="col-xs-12">
+  <h1>Gestionar receta</h1>
+</div>
+<form [formGroup]="recipeForm">
+  <div class="row">
+    <div class="row">
+      <div class="col-xs-12">
+        Nombre
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <input type="text" name="Recipe name" formControlName="name">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        Descripción
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <input type="text" name="Recipe description" formControlName="description">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        Imagen
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <input type="url" name="Recipe image url" formControlName="imagePath">
+      </div>
+    </div>
+  </div>
+  <div>
+    <p>Adicionar Ingrediente</p>
+    <div class="row">
+      <div class="col-xs-6">
+        Ingrediente
+      </div>
+      <div class="col-xs-3">
+        Cantidad
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        <input #nameInput type="text" name="Ingredient name" [value]="iName">
+      </div>
+      <div class="col-xs-3">
+        <input #amountInput type="number" name="Amount" [value]="iAmount">
+      </div>
+      <div class="col-xs-3">
+        <button style="margin-top: -5px;" type="button" class="btn btn-success" (click)="addIngredient()">Adicionar</button>
+      </div>
+      <div *ngIf="hasErrorIngredient">
+        <p style="color: red;">Adicione al menos un ingrediente</p>
+      </div>
+    </div>
+  </div>
+  <div formArrayName="ingredients" *ngIf="ingredients.controls.length > 0">
+    <table class="table">
+      <thead class="text-danger">
+        <tr>
+          <th style="width: 50%">Ingrediente</th>
+          <th style="width: 20%">Cantidad</th>
+          <th style="width: 30%">Operaciones</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let ing of ingredients.controls; let i = index">
+              <th style="width: 50%">{{ing.value.name}}</th>
+              <th style="width: 20%">{{ing.value.amount}}</th>
+              <th style="width: 30%">
+                <button type="button" class="btn btn-danger" (click)="removeIngredient(i)">Borrar</button>
+              </th>
+            </tr>
+      </tbody>
+    </table>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="save()">{{buttonSaveText}}</button>
+</form>

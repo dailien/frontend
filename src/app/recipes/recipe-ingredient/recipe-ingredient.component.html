@@ -1,0 +1,17 @@
+<h3>Ingredientes</h3>
+<div *ngIf="ingredients.length > 0">
+    <table class="table">
+      <thead class="text-danger">
+        <tr>
+          <th style="width: 70%">Ingrediente</th>
+          <th style="width: 30%">Cantidad</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let ing of ingredients">
+              <th style="width: 70%">{{ing[0]}}</th>
+              <th style="width: 30%">{{ing[1]}}</th>
+            </tr>
+      </tbody>
+    </table>
+  </div>
